@@ -1,0 +1,25 @@
+COLUMNS INFORMATION FILE
+------------------------
+
+It is hoped that you will enjoy this game as well as being able to change the
+game to suit your own preferences.  Please acknowledge the author should you
+redistribute a changed version of COLUMNS!
+
+Please Note that all other text files are in DOS format and contain some
+characters which will appear incorrectly if read from Windows.  The actual
+program will run correctly from Windows.
+
+The following files should be present after unzipping:
+
+        COLUMN1.ASM
+        COLUMN2.ASM
+        COLUMN3.ASM
+        COLUMNS.COM
+        COLUMNS.TXT
+        INFORM.TXT
+        README.1ST
+
+Type columns from the directory you have unzipped into in order to run the 
+game.
+
+                                                        A.Latchem 1993

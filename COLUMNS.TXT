@@ -1,0 +1,24 @@
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ points.  As you  become more confident
+³                                      ³ you can raise the  skill level and the
+³                                      ³ columns will drop down the screen at a
+³     ÉÍ¸ ÉÍ» Ò   Ò Ò É»É» É» Ò ÉÍµ    ³ faster rate.
+³     º   º º º   º º ºÈ¼º ºÈ»º ÈÍ»    ³
+³     ÈÍ¾ ÈÍ¼ ÈÍ¾ ÈÍ¼ Ğ  Ğ Ğ È¼ ÆÍ¼    ³ To play the  game type  COLUMNS at the
+³    ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ   ³ dos prompt.
+³                                      ³
+³     ±±            By          ²²     ³ You are then asked if you want to play
+³     ±±                        ²²     ³ .Type Y to continue  and then a number
+³ ÛÛ                                °° ³ from 1 to 9 which  will set  the speed
+³ ÛÛ        A.Latchem - 1993        °° ³ of the game. 1 is the fastest and 9 is
+³                                      ³ the slowest.
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+                                         Use  the  following  keys to  move the
+Columns is  a game played with  various  columns :-
+sets of 4 different  blocks that travel
+down the screen in columns three blocks          Z - move left
+high.   You must  make  sure  that they          X - move right
+cannot build up to the  top by removing          C - rotate column
+rows and columns  of 3 or  more similar          E - End the game
+blocks  at  a  time.  For each  row you          M - Music ON/OFF
+remove you will  score a  set number of
+                                                "May the force be with you ..."

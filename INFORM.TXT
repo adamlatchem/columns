@@ -1,0 +1,157 @@
+                    ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ 
+                    ³                                      ³ 
+                    ³                                      ³ 
+                    ³     ÉÍ¸ ÉÍ» Ò   Ò Ò É»É» É» Ò ÉÍµ    ³ 
+                    ³     º   º º º   º º ºÈ¼º ºÈ»º ÈÍ»    ³
+                    ³     ÈÍ¾ ÈÍ¼ ÈÍ¾ ÈÍ¼ Ğ  Ğ Ğ È¼ ÆÍ¼    ³ 
+                    ³    ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ   ³ 
+                    ³                                      ³
+                    ³     ±±     Written for PCs    ²²     ³ 
+                    ³     ±±                        ²²     ³ 
+                    ³ ÛÛ         V1.3 Information       °° ³ 
+                    ³ ÛÛ         A.Latchem - 1993       °° ³ 
+                    ³                                      ³ 
+                    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+
+  Introduction.
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  Columns is a small text mode game written for IBM PCs and compatibles.  It
+  was written in 8086 assembly language and is thus very small.  The original
+  aim of the project was to learn how to program in 8086 assembly language 
+  and after three days the first version was produced.  Since then the
+  game has been made smaller and now fits in to just over three kilobytes of
+  disk space.
+
+  Files.
+  ÄÄÄÄÄÄ
+
+  There are three assembly language files for this gane.  The first is the
+  file COLUMN1.ASM.  This is the main loop for the game.  It also contains a
+  few variables.  The second COLUMN2.ASM holds the interrupt routine that
+  plays the music and moves the blocks down the screen,  It also helps produce
+  the fairly random numbers used to choose 1 of the four blocks available.
+  The final source code file is COLUMN3.ASM.  This contains the main routines
+  for the game and most of the data declarations.
+
+  Output.
+  ÄÄÄÄÄÄÄ
+
+  All screen output is performed directly by poking values in to the screen
+  memory.  If this does not work on your PC for what ever reason then COLUMNS
+  will not work correctly.  The program does check to see if you have a
+  colour or monochrome graphics adapter, but it does not make sure that you
+  are in text mode, so if you are not then again the program will not work.
+
+  The two main "screens" used in the program are contained at the end of
+  COLUMN3.ASM.  A loop is used to draw these pictures on to the screen.  The
+  relevant procedure is DRAWSCREEN.
+
+  The current score has to be displayed on the screen.  This is performed again
+  directly to the screen by a procedure called PRINTSCORE in COLUMN3.ASM.  The
+  score value is taken and divided by 1000, 100, 10 and the remainder then used
+  in order to display the score on the screen.
+
+  The only other output that the program produces is sound.  This is done by
+  setting a count up in one of the PCs internal timers.  This is then sent
+  directly to the speaker so that as it turns rapidly on and off a sound is
+  heard.  The routine is run from an interrupt vector.  If you change the
+  music the format is #length,#note and terminate the tune with &HFF,&HFF.
+  if you want a rest then set the note number to 0.
+
+  The frequencies of the notes are held at the symbol NOTEDATA.  It would be
+  possible to make the program even smaller by removing frequency definitions
+  for the notes that are not used.
+
+  How Columns Are Read.
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  The main part of the program is being able to score rows and columns.  This
+  is performed by the COLUMNS procedure in COLUMN3.ASM.  The screen memory is
+  read directly to perform this operation.  Each character in the playing
+  area is taken one by one.  If a blank character cell is read it is ignored.
+  If the cell contains a block then the score for the block is calculated.  A
+  loop then reads along the line to count how many similar blocks there are.
+  A score is then calculated if there are three or more blocks.  The blocks are
+  then replaced with a space (ASCII character 32).  A similar check is 
+  performed vertically.
+
+  After removing any valid rows/columns, the routine COMPACT in COLUMN3.ASM is
+  called.  This reads the screen memory and removes any spaces by moving blocks
+  down until they can go no further.  A flag is used to see if another pass
+  should be performed.
+
+  The End Is Nigh.
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  The game will produce a new set of blocks each time the current set can move
+  no further down the screen.  When this happens, the horizontal position of
+  the blocks is set to 11 and the vertical position to 0.  If no more blocks
+  can appear on the screen then obviously this value will already be set up
+  when the procedure NEWBLOCK in COLUMN3.ASM is called.  If this is the case
+  then all that happens is that a flag is set in order to stop the play loop
+  and to get back to the 'Want to Play [Y/N]?' prompt.
+
+  Control.
+  ÄÄÄÄÄÄÄÄ
+
+  The control is performed by using a dos interrupt call to get a key stroke
+  from the keyboard buffer.  This ASCII charcter is then made upper case so
+  that less checking is required by stripping off bit 5.  Then the charcter
+  value can be compared to decide what should be done.
+
+  The music toggle is a simple routine called if the user presses the key 'M'.
+  The interrupt driven music routine tests a flag to see if it should play the
+  music or not - see COULMN2.ASM
+
+  When the blocks are moved down the screen, the block either side of the
+  bottom block is read from the screen and stored in two variables.  These
+  are used to decide if the blocks can be moved left or right.  If the
+  procedure does not return ASCII 32 either side of the block then it is not
+  able to move in to that postion.  When Z or X are pressed, these variables
+  are read to decide if a left or right move is possible.
+
+  The rotate function is accomplished by reading the current three blocks in
+  to sojme registers and storing them, in a different order - fast and above
+  all effective.
+
+  The end play option (Key 'E') is acheived by simply setting the exit flag
+  so that the play loop exits - similiar in operation to detecting the end
+  of the game when no more blocks cvan be placed on the screen.
+
+  Miscellaneous.
+  ÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  The columns are moved down the screen by the interrupt driven routine.  The
+  program has its' own internal clock and when the clock reaches the same value
+  as the speed set at the start of play, the columns are moved down by 1 
+  position.
+
+  The source for this program are included in the file COLUMNS.ZIP and should
+  have been produced upon de-compression.  The files you should have are :-
+
+                INFORM.TXT  - This text file
+                COLUMNS.TXT - Short file on how to play columns
+                COLUMN1.ASM \
+                COLUMN2.ASM | 8086 Assembly language source files.
+                COLUMN3.ASM /
+                COLUMN.COM  - Executable game file
+
+  It is hoped that this game will be enjoyable both to play (?!!) and also as
+  a very rough outline for people who wish to get started in programming of
+  any sort.  The principals envolved are hopefully explained by the files
+  given.  The assembly language should not be too difficult to understand as
+  it is mostly simple routines (had to be for me to understand !).
+
+  If you have enjoyed the game, found the files useful or both, then you could
+  send a donation of any size to :-
+
+                Mr A. LATCHEM,
+                NEW STAR COTTAGE,
+                WARWICK ROAD,
+                SOLIHULL,
+                B93 0BU
+
+  Thank-you for listening ...
+
+  Enjoy the game !
